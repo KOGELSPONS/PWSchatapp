@@ -1,8 +1,17 @@
 from cryptography.fernet import Fernet
+import os
 
 # Activates if existing
-# Used to create a password and encrypt your key with that password get's deleted after
-import firstsetup
+if os.path.exists("firstsetup.py") :
+  # Used to create a password and encrypt your key with that password get's deleted after
+  import firstsetup
+elif not os.path.exists("system.key") or not os.path.exists("delt.key") or not os.path.exists("app.key") or not os.path.exists("data.key") :
+  os.remove("app.key")
+  os.remove("system.key")
+  os.remove("delt.key")
+  os.remove("data.key")
+  print("Reinstal your OS")
+  exit()
 
 # Decrypting the encrypted key using password after decrypt() is activated
 def decrypt(key, encrykey):
@@ -55,4 +64,3 @@ with open('test.py', 'wb') as dec_file:
 decryfile = "Nil"
 del decryfile
 
-import test

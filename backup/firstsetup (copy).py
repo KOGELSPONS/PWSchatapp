@@ -97,3 +97,5 @@ with open('app.key', 'wb') as encrypted_file:
 # Remove any information about this/these variable('s) on the memory
 encryfile = "Nil"
 del encryfile
+
+import delt
