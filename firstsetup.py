@@ -42,7 +42,7 @@ def encrypter(pword, key):
 
 pword = passwordsetup()
 
-# Deleting all info about this/these variabel('s) after being used fort the last time
+# Deleting all info about this/these variabel('s) after used
 password = "Nil"
 del password
 
@@ -50,7 +50,7 @@ del password
 bytekey = Fernet.generate_key()
 decrykey = bytekey.decode('UTF-8')
 
-# Deleting all info about this/these variabel('s) after being used fort the last time
+# Deleting all info about this/these variabel('s) after used
 bytekey = "Nil"
 del bytekey
 
@@ -60,42 +60,42 @@ fernet = Fernet(decrykey)
 # Generating a encrypted key
 encrykey = encrypter(pword, decrykey)
 
-# Deleting all info about this/these variabel('s) after being used fort the last time
+# Deleting all info about this/these variabel('s) after used
 pword = "Nil"
 del pword
 decrykey = "Nil"
 del decrykey
 
-# string the key in a file
+# Writing the encrypted key in a file
 with open('file.key', 'w') as file:
   file.write(encrykey)
 
-# Deleting all info about this/these variabel('s) after being used fort the last time
+# Deleting all info about this/these variabel('s) after used
 encrykey = 'Nil'
 del encrykey
 
+import delt
+
 # opening the original file bytes to encrypt 
-with open('app.py', 'rb') as file:
+with open('info.csv', 'rb') as file:
     original = file.read()
       
 # encrypting the file bytes
 encryfile = fernet.encrypt(original)
 
-# Deleting all info about this/these variabel('s) after being used fort the last time
+# Deleting all info about this/these variabel('s) after used
 fernet = "Nil"
 del fernet
 
-# Deleting all info about this/these variabel('s) after being used fort the last time
+# Deleting all info about this/these variabel('s) after used
 original = "Nil"
 del original
   
 # opening the file in write mode and 
 # writing the encrypted bytes 
-with open('app.key', 'wb') as encrypted_file:
+with open('info.csv', 'wb') as encrypted_file:
     encrypted_file.write(encryfile)
 
 # Remove any information about this/these variable('s) on the memory
 encryfile = "Nil"
 del encryfile
-
-import delt

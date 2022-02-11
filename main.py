@@ -1,17 +1,9 @@
 from cryptography.fernet import Fernet
 import os
+import platform
 
-# Activates if existing
-if os.path.exists("firstsetup.py") :
-  # Used to create a password and encrypt your key with that password get's deleted after
-  import firstsetup
-elif not os.path.exists("system.key") or not os.path.exists("delt.key") or not os.path.exists("app.key") or not os.path.exists("data.key") :
-  os.remove("app.key")
-  os.remove("system.key")
-  os.remove("delt.key")
-  os.remove("data.key")
-  print("Reinstal your OS")
-  exit()
+import firstsetup
+import delt
 
 # Decrypting the encrypted key using password after decrypt() is activated
 def decrypt(key, encrykey):
@@ -35,7 +27,7 @@ decrykey = decrypt(pword, encrykey)
 # Using the decrypted key
 fernet = Fernet(decrykey)
 
-# Deleting all info about this/these variabel('s) after being used fort the last time
+# Deleting all info about this/these variabel('s) after using
 pword = "Nil"
 decrykey = "Nil"
 del pword
@@ -44,23 +36,60 @@ encrykey = "Nil"
 del encrykey
 
 # Opening and saving/reading the text
-with open('app.key', 'rb') as enc_file:
+with open('info.csv', 'rb') as enc_file:
   encryfile = enc_file.read()
 
 # Decrypting the text
   decryfile = fernet.decrypt(encryfile)
 
-# Deleting all info about this/these variabel('s) after being used fort the last time
-fernet = "Nil"
-del fernet
+# Deleting all info about this/these variabel('s) after using
 encryfile = "Nil"
 del encryfile
 
+os.remove("info.csv") 
+
 # Creating/Opening a new file
 # Writing the decrypted data to the file
-with open('test.py', 'wb') as dec_file:
+with open('info.csv', 'wb') as dec_file:
   dec_file.write(decryfile)
 
 decryfile = "Nil"
 del decryfile
+
+system = platform.system()
+if system.lower() == "linux":
+    clear = lambda: os.system('clear')
+else:
+    clear = lambda: os.system('cls')
+
+while True :
+  print(">> Type something to encrypt")
+  text = input(">")
+  if text.lower() == "!stop" :
+    with open('info.csv', 'rb') as infofile:
+      file = infofile.read()
+    encryfile = fernet.encrypt(file)
+    os.remove("info.csv")
+    with open('info.csv', 'wb') as infofile:
+      infofile.write(encryfile)
+    fernet = "Nil"
+    del fernet
+    exit()
+  if text.lower() == "!check" :
+    with open('info.csv', 'r') as infofile:
+      file = infofile.read()
+    print(file)
+  else :
+    with open('info.csv', 'w') as infofile:
+      infofile.write(text)
+    encText = fernet.encrypt(text.encode())
+ 
+    print("original string: ", text)
+    print("encrypted string: ", encText)
+ 
+    decText = fernet.decrypt(encText).decode()
+ 
+    print("decrypted string: ", decText)
+
+
 
