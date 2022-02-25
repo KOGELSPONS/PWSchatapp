@@ -51,7 +51,7 @@ encrykey = "Nil"
 del encrykey
 
 # Opening and saving/reading the text
-with open('info.csv', 'rb') as enc_file:
+with open('info.csv', 'r') as enc_file:
   encryfile = enc_file.read()
 
 # Decrypting the text
@@ -65,7 +65,7 @@ os.remove("info.csv")
 
 # Creating/Opening a new file
 # Writing the decrypted data to the file
-with open('info.csv', 'wb') as dec_file:
+with open('info.csv', 'w') as dec_file:
   dec_file.write(decryfile)
 
 decryfile = "Nil"
