@@ -6,7 +6,7 @@ import re
 def passwordsetup():
     while True:
         time.sleep(1)
-        print(">> Requirements: Lenght: 8, Number: Yes, Capital: Yes")
+        print(">> Requirements: Lenght 8, Number, Capital Letter")
         print(">> Enter your Password:")
         password = input("> ")
         if len(password) < 8: 
@@ -50,7 +50,11 @@ del password
 
 # key generation + bytes -> string
 bytekey = Fernet.generate_key()
+print(type(bytekey))
+print(bytekey)
 decrykey = bytekey.decode('UTF-8')
+print(decrykey)
+print(type(decrykey))
 
 # Deleting all info about this/these variabel('s) after used
 bytekey = "Nil"
@@ -76,10 +80,8 @@ with open('file.key', 'w') as file:
 encrykey = 'Nil'
 del encrykey
 
-import delt
-
 # opening the original file bytes to encrypt 
-with open('info.csv', 'rb') as file:
+with open('info.csv', 'r') as file:
     original = file.read()
       
 # encrypting the file bytes
@@ -95,7 +97,7 @@ del original
   
 # opening the file in write mode and 
 # writing the encrypted bytes 
-with open('info.csv', 'wb') as encrypted_file:
+with open('info.csv', 'w') as encrypted_file:
     encrypted_file.write(encryfile)
 
 # Remove any information about this/these variable('s) on the memory
