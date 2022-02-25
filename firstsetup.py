@@ -6,7 +6,7 @@ import re
 def passwordsetup():
     while True:
         time.sleep(1)
-        print(">> Requirements: Lenght: 8, Number: Yes, Capital: Yes")
+        print(">> Requirements: Lenght 8, Number, Capital Letter")
         print(">> Enter your Password:")
         password = input("> ")
         if len(password) < 8: 
