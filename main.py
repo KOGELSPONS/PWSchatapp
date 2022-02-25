@@ -19,20 +19,6 @@ def decrypt(key, encrykey):
 with open('file.key', 'r') as file:
     encrykey = file.read()
 
-def passwordsetup():
-    while True:
-        time.sleep(1)
-        print(">> Requirements: Lenght: 8, Number: Yes, Capital: Yes")
-        password = input('>> Unlock chatapp: ')
-        if len(password) < 8: 
-            print(">> Make sure your password is at lest 8 letters")
-        elif re.search('[0-9]',password) is None:
-            print(">> Make sure your password has a number in it")
-        elif re.search('[A-Z]',password) is None: 
-            print(">> Make sure your password has a capital letter in it")
-        else:
-          passwordsetup()
-
 # Entering your password
 pword = input('>> Unlock chatapp: ')
 
