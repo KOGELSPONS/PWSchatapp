@@ -6,6 +6,8 @@ from cryptography.fernet import Fernet
 
 import delt
 
+print("!!!After DeltMain")
+
 # Decrypting the encrypted key using password after decrypt() is activated
 def decrypt(key, encrykey):
     decrykey = []
@@ -24,6 +26,9 @@ pword = input('>> Unlock chatapp: ')
 
 # Getting the decrypted key
 decrykey = decrypt(pword, encrykey)
+
+print(type(decrykey))
+print(decrykey)
 
 # Using the decrypted key
 fernet = Fernet(decrykey)

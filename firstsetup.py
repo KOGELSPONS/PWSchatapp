@@ -50,9 +50,11 @@ del password
 
 # key generation + bytes -> string
 bytekey = Fernet.generate_key()
+print(type(bytekey))
 print(bytekey)
 decrykey = bytekey.decode('UTF-8')
 print(decrykey)
+print(type(decrykey))
 
 # Deleting all info about this/these variabel('s) after used
 bytekey = "Nil"
@@ -78,7 +80,11 @@ with open('file.key', 'w') as file:
 encrykey = 'Nil'
 del encrykey
 
+print("!!!Before Delt")
+
 import delt
+
+print("!!!After DeltFirstSetup")
 
 # opening the original file bytes to encrypt 
 with open('info.csv', 'r') as file:
