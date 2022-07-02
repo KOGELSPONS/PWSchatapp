@@ -1,6 +1,5 @@
 from cryptography.fernet import Fernet
-import time
-import re
+import time, re, os, time
 
 # The setup of making your chatapp password
 def passwordsetup():
@@ -81,6 +80,9 @@ with open('file.key', 'w') as file:
 encrykey = 'Nil'
 del encrykey
 
+time.sleep(1)
+open('info.csv', 'wb')
+  
 # opening the original file bytes to encrypt 
 with open('info.csv', 'rb') as file:
     original = file.read()

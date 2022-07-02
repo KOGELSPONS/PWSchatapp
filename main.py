@@ -1,9 +1,7 @@
-import os
-import platform
-import time
 from cryptography.fernet import Fernet
+import os, platform, time, delt
 
-import delt
+time.sleep(1)
 
 # Decrypting the encrypted key using password after decrypt() is activated
 def decrypt(key, encrykey):
@@ -22,23 +20,17 @@ with open('file.key', 'r') as file:
 pword = input('>> Unlock chatapp: ')
 
 # Getting the decrypted key, then string -> bytes
-decrykey = decrypt(pword, encrykey)
-bytekey = decrykey.encode('UTF-8')
-
-type(decrykey)
-print(decrykey)
-type(bytekey)
-print(bytekey)
+decrykey = decrypt(pword, encrykey).encode('UTF-8')
 
 # Using the decrypted key
-fernet = Fernet(bytekey)
+fernet = Fernet(decrykey)
 
 # Deleting all info about this/these variabel('s) after using
 pword = "Nil"
 decrykey = "Nil"
+encrykey = "Nil"
 del pword
 del decrykey
-encrykey = "Nil"
 del encrykey
 
 # Opening and saving/reading the text
@@ -54,9 +46,7 @@ print(decryfile)
 
 # Deleting all info about this/these variabel('s) after using
 encryfile = "Nil"
-del encryfile
-
-os.remove("info.csv") 
+del encryfile 
 
 # Creating/Opening a new file
 # Writing the decrypted data to the file
@@ -77,17 +67,22 @@ while True :
   print(">> Type something to encrypt")
   text = input("> ")
   if text.lower() == "!stop" :
+    with open('info.csv', 'r') as infofile:
+      file = infofile.read()
+    print(file)
+    chatlist = file.split()
+    
+    print(chatlist)
+
+    with open('info.csv', 'w') as infofile:
+      infofile.write(chatlist)
+    
     with open('info.csv', 'rb') as infofile:
       file = infofile.read()
-    chatlist = file.split("\n")
     
-    encryfile = fernet.encrypt(chatlist)
+    encryfile = fernet.encrypt(file)
 
     with open('info.csv', 'wb') as infofile:
-      # Just removing it, so if it would store anything it would be gone
-      infofile.write("1010101010101010101")
-      os.remove("info.csv")
-      # Writing encrypted data
       infofile.write(encryfile)
       
     fernet = "Nil"
